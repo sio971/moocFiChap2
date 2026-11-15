@@ -6,6 +6,12 @@ services:
     environment:
       - REQUEST_ORIGIN=http://localhost:5001
       - REDIS_HOST=redis
+      - POSTGRES_HOST=db
+      
+      
+     
+    depends_on:
+      - db
     restart: unless-stopped
     container_name: backend
     
@@ -19,7 +25,19 @@ services:
     
   redis:
     image: redis:latest
-    
-    
     container_name: redis
+    
+  db:
+    image: postgres:18
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DATABASE=postgres
+      
+    container_name: db_backend
+    
+  
+  
+ 
       
